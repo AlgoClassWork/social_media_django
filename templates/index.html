@@ -7,4 +7,9 @@
         <img src="{{ post.image.url }}">
     {% endif %}
     <p> {{ post.content | truncatewords:20 }} </p>
+    <a href=" post/{{post.id}} "> Читать </a>
+
+{% empty %}
+<p> Постов нет </p>
 {% endfor %}
+
