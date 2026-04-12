@@ -1,1 +1,9 @@
-{{ post }}
+
+<h2> {{ post.title }} </h2>
+<p> {{ post.author.username }} | {{ post.created_at }} </p>
+{% if post.image %}
+    <img src="{{ post.image.url }}">
+{% endif %}
+<p> {{ post.content}} </p>
+
+<a href=" {% url 'post_list' %} "> Вернуться </a>

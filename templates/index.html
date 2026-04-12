@@ -1,5 +1,7 @@
 
 <h1> Все посты </h1>
+<a href="{% url 'register' %}"> Регистрация </a>
+
 {% for post in posts %}
     <h2> {{ post.title }} </h2>
     <p> {{ post.author.username }} | {{ post.created_at }} </p>
@@ -7,7 +9,7 @@
         <img src="{{ post.image.url }}">
     {% endif %}
     <p> {{ post.content | truncatewords:20 }} </p>
-    <a href=" post/{{post.id}} "> Читать </a>
+    <a href=" {% url 'post_detail' post.id %} "> Читать </a>
 
 {% empty %}
 <p> Постов нет </p>
