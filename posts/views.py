@@ -4,6 +4,7 @@ from .models import Post
 
 # Create your views here.
 def register(request):
+    form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         form.save()
