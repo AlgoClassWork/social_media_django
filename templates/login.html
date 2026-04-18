@@ -1,6 +1,41 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button> Войти </button>
-</form>
-    
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="article-container shadow-sm">
+            <h2 class="text-center fw-bold mb-4">Вход</h2>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-secondary">{{ field.label }}</label>
+                        {# Добавляем класс form-control вручную через цикл #}
+                        <input type="{{ field.field.widget.input_type }}" 
+                               name="{{ field.html_name }}" 
+                               class="form-control custom-input" 
+                               id="{{ field.id_for_label }}"
+                               {% if field.value %}value="{{ field.value }}"{% endif %}>
+                        
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ field.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-custom">Войти</button>
+                </div>
+            </form>
+            
+            <div class="text-center mt-3">
+                <p class="text-muted small">Впервые здесь? <a href="{% url 'register' %}" class="fw-bold">Создать аккаунт</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

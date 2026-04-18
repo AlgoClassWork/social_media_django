@@ -1,9 +1,33 @@
+{% extends 'base.html' %}
 
-<h2> {{ post.title }} </h2>
-<p> {{ post.author.username }} | {{ post.created_at }} </p>
-{% if post.image %}
-    <img src="{{ post.image.url }}">
-{% endif %}
-<p> {{ post.content}} </p>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <a href="{% url 'post_list' %}" class="text-decoration-none text-muted mb-3 d-inline-block">
+            &larr; Назад к списку
+        </a>
 
-<a href=" {% url 'post_list' %} "> Вернуться </a>
+        <article class="article-wrapper">
+            <header class="mb-4">
+                <h1 class="fw-bold display-5">{{ post.title }}</h1>
+                <div class="text-muted small">
+                    Опубликовано: {{ post.created_at|date:"d E Y в H:i" }} | 
+                    Автор: <span class="text-primary fw-bold">{{ post.author.username }}</span>
+                </div>
+            </header>
+
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid rounded-4 mb-4 w-100" alt="{{ post.title }}">
+            {% endif %}
+
+            <div class="post-content">
+                {{ post.content|linebreaks }}
+            </div>
+            
+            <div class="mt-5 pt-3 border-top">
+                <p class="text-muted small">Спасибо за чтение! Оставляйте свои комментарии (если они предусмотрены).</p>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}
