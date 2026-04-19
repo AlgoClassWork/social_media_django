@@ -19,7 +19,7 @@ from django.contrib.auth import views
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from posts.views import post_list, post_detail, register
+from posts.views import post_list, post_detail, register, post_create
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,8 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(template_name='login.html') , name='login'),
     path('logout/', views.LogoutView.as_view() , name='logout'),
     path('', post_list, name='post_list'),  
-    path('post/<int:id>', post_detail, name='post_detail')
+    path('post/<int:id>', post_detail, name='post_detail'),
+    path('post/create/', post_create, name='post_create')
 ]
 
 if settings.DEBUG:

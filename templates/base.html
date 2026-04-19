@@ -23,6 +23,7 @@
                     {% csrf_token %}
                     <button class="btn btn-sm btn-outline-danger">Выход</button>
                 </form>
+                <a href="{% url 'post_create' %}" class="btn btn-sm btn-outline-light me-2">Создать пост</a>
             {% else %}
                 <a href="{% url 'login' %}" class="btn btn-sm btn-outline-light me-2">Вход</a>
                 <a href="{% url 'register' %}" class="btn btn-sm btn-primary">Регистрация</a>
