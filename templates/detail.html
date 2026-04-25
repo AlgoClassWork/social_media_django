@@ -7,6 +7,10 @@
             &larr; Назад к списку
         </a>
 
+        {% if user == post.author %}
+            <a href="{% url 'post_delete' post.id %}"> Удалить </a>
+        {% endif %}
+
         <article class="article-wrapper">
             <header class="mb-4">
                 <h1 class="fw-bold display-5">{{ post.title }}</h1>
