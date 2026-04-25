@@ -39,3 +39,13 @@ def post_delete(request, id):
         post.delete()
         return redirect('post_list')
     return render(request, 'delete.html')
+
+@login_required
+def post_update(request, id):
+    post = get_object_or_404(Post, id=id, author=request.user)
+    form = PostForm(instance=post)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        form.save()
+        return redirect('post_detail', id=post.id)
+    return render(request, 'form.html', {'form':form})  
