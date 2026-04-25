@@ -30,6 +30,7 @@ urlpatterns = [
     path('post/<int:id>', post_detail, name='post_detail'),
     path('post/create/', post_create, name='post_create'),
     path('post/delete/<int:id>', post_delete, name='post_delete'),
+    path('post/update/<int:id>', post_update, name='post_update'),
 ]
 
 if settings.DEBUG:
