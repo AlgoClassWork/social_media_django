@@ -11,3 +11,4 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'post', 'created_at')
     search_fields = ('content', )
+

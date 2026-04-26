@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 def register(request):
@@ -50,3 +50,16 @@ def post_update(request, id):
         form.save()
         return redirect('post_detail', id=post.id)
     return render(request, 'form.html', {'form':form})  
+
+@login_required
+def comment_create(request, id):
+    post = get_object_or_404(Post, id=id)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.author = request.user
+        comment.save()
+        return redirect('post_detail', id=post.id)
+    return render(request, 'comment_form.html', {'form':form} )  
