@@ -30,7 +30,9 @@
             </div>
             
             <div class="mt-5 pt-3 border-top">
-                <p class="text-muted small">Спасибо за чтение! Оставляйте свои комментарии (если они предусмотрены).</p>
+                {% for comment in comments %}
+                    <p class="text-muted small">{{comment.author}} - {{ comment.content }} </p>
+                {% endfor %}
             </div>
         </article>
     </div>
