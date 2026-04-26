@@ -19,7 +19,8 @@ def post_list(request):
 
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
-    return render(request, 'detail.html', {'post': post})
+    comments = post.comments.all()
+    return render(request, 'detail.html', {'post': post, 'comments': comments})
 
 @login_required
 def post_create(request):
